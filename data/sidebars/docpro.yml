@@ -1,0 +1,60 @@
+# This is your sidebar TOC. The sidebar code loops through sections here and provides the appropriate formatting.
+
+entries:
+- title: Sidebar
+  levels: one
+  folders:
+    - title: Setup
+      output: web
+      folderitems:
+        - title: Getting Started with LiquiDoc
+          url: get-started-liquidoc
+          output: web
+        - title: Setup Local Tools
+          url: setup-toolset
+          output: web
+    - title: Build
+      output: web
+      folderitems:
+        - title: Building a Basic Docset
+          url: build-docs-basic
+          output: web
+        - title: Building Advanced Docsets
+          url: build-docs-advanced
+          output: web
+    - title: Contribute
+      output: web
+      folderitems:
+        - title: AsciiDoc for Content
+          url: write-edit-asciidoc
+          output: web
+        - title: Managing Files
+          url: manage-source
+          output: web
+        - title: Working with Git
+          url: commit-git
+          output: web
+        - title: YAML for Small Data
+          url: write-edit-yaml
+          output: web
+        - title: Submitting for Review
+          url: submit-data-content
+          output: web
+        - title: Reviewing Merge Requests
+          url: review-data-content
+          output: web
+    - title: Understand
+      output: web
+      folderitems:
+        - title: LiquiDoc CMF Intro
+          url: overview-liquidoc-cmf
+          output: web
+        - title: This LDCMF Environment
+          url: ldcmf-structure-this
+          output: web
+        - title: Contributor Rights
+          url: understand-contributor-rights
+          output: web
+        - title: Merge Request Evaluation
+          url: understand-reviews-policy
+          output: web

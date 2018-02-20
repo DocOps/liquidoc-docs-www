@@ -1,0 +1,81 @@
+# This is your sidebar TOC. The sidebar code loops through sections here and provides the appropriate formatting.
+
+entries:
+- title: Sidebar
+  levels: one
+  folders:
+    - title: Setup
+      output: web
+      folderitems:
+        - title: Bootstrap an LDCMF Environment
+          url: initialize-docs-env
+          output: web
+    - title: Build
+      output: web
+      folderitems:
+        - title: Building a Basic Docset
+          url: build-docs-basic
+          output: web
+        - title: Building Advanced Docsets
+          url: build-docs-advanced
+          output: web
+        - title: Building for Dev/Testing
+          url: build-docs-testing-dev
+          output: web
+    - title: Contribute
+      output: web
+      folderitems:
+        - title: YAML for Small Data
+          url: write-edit-yaml
+          output: web
+    - title: Configure
+      output: web
+      folderitems:
+        - title: AsciiDoc Preprocessing
+          url: overview-asciidoc-preproc
+          output: web
+        - title: Migrating Assets During a Docs Build
+          url: migrate-assets
+          output: web
+        - title: Parsing Small Data
+          url: parse-small-data
+          output: web
+        - title: Converting Small Data
+          url: convert-small-data
+          output: web
+        - title: Rendering HTML5
+          url: render-html
+          output: web
+        - title: Rendering PDF
+          url: render-pdf
+          output: web
+        - title: Generating Static Site
+          url: generate-static-site
+          output: web
+        - title: Product Repo as Submodule
+          url: product-repo-as-submodule
+          output: web
+        - title: AsciiDoc Includes in LiquiDoc
+          url: working-includes
+          output: web
+    - title: Extend
+      output: web
+      folderitems:
+        - title: Extending LiquiDoc
+          url: extend-liquidoc
+          output: web
+    - title: Modify
+      output: web
+      folderitems:
+        - title: Alternating LiquiDoc Gems
+          url: run-liquidoc-alternate-gem
+          output: web
+    - title: Manage
+      output: web
+      folderitems:
+        - title: Release History Production
+          url: manage-release-history
+          output: web
+        - title: Adapting These Docs
+          url: adapt-these-docs
+          output: web

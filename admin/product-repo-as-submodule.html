@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="keywords" content=",  ">
+<title>Treating a Product Repository as a Submodule | LiquiDoc Docs-as-Code Platform</title>
+<link rel="stylesheet" href="../theme/css/syntax.css">
+
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<!--<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">-->
+<link rel="stylesheet" href="../theme/css/modern-business.css">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="../theme/css/asciidoctor.css">
+<link rel="stylesheet" href="../theme/css/custom.css">
+<link rel="stylesheet" href="../theme/css/boxshadowproperties.css">
+<!-- most color styles are extracted out to here -->
+<link rel="stylesheet" href="../theme/css/theme-blue.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<script src="../theme/js/jquery.navgoco.min.js"></script>
+
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<!-- Anchor.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/2.0.0/anchor.min.js"></script>
+<script src="../theme/js/toc.js"></script>
+<script src="../theme/js/customscripts.js"></script>
+
+<link rel="shortcut icon" href="images/favicon.ico">
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link rel="alternate" type="application/rss+xml" title="LiquiDoc & LiquiDoc CMF | The Docs" href="127.0.0.1/admin/feed.xml">
+
+    <script>
+        $(document).ready(function() {
+            // Initialize navgoco with default options
+            $("#mysidebar").navgoco({
+                caretHtml: '',
+                accordion: true,
+                openClass: 'active', // open
+                save: false, // leave false or nav highlighting doesn't work right
+                cookie: {
+                    name: 'navgoco',
+                    expires: false,
+                    path: '/'
+                },
+                slide: {
+                    duration: 400,
+                    easing: 'swing'
+                }
+            });
+
+            $("#collapseAll").click(function(e) {
+                e.preventDefault();
+                $("#mysidebar").navgoco('toggle', false);
+            });
+
+            $("#expandAll").click(function(e) {
+                e.preventDefault();
+                $("#mysidebar").navgoco('toggle', true);
+            });
+
+        });
+
+    </script>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("#tg-sb-link").click(function() {
+                $("#tg-sb-sidebar").toggle();
+                $("#tg-sb-content").toggleClass('col-md-9');
+                $("#tg-sb-content").toggleClass('col-md-12');
+                $("#tg-sb-icon").toggleClass('fa-toggle-on');
+                $("#tg-sb-icon").toggleClass('fa-toggle-off');
+            });
+        });
+    </script>
+    
+
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container topnavlinks">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="fa fa-home fa-lg navbar-brand" href="index.html">&nbsp;<span class="projectTitle"> LiquiDoc</span></a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <!-- toggle sidebar button -->
+                <li><a id="tg-sb-link" href="#"><i id="tg-sb-icon" class="fa fa-toggle-on"></i> Nav</a></li>
+                <!-- entries without drop-downs appear here -->
+
+
+
+
+                
+                
+                
+                <li><a href="https://github.com/DocOps/liquidoc-docs" target="_blank">GitHub</a></li>
+                
+                
+                
+                <!-- entries with drop-downs appear here -->
+                <!-- conditional logic to control which topnav appears for the audience defined in the configuration file.-->
+                
+                
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">External Help<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        
+                        
+                        <li><a href="https://github.com/tomjoht/documentation-theme-jekyll" target="_blank">Jekyll Documentation Theme</a></li>
+                        
+                        
+                        
+                        <li><a href="https://github.com/briandominick/liquidoc-gem" target="_blank">LiquiDoc</a></li>
+                        
+                        
+                        
+                        <li><a href="https://github.com/DocOps/liquidoc-cmf" target="_blank">LiquiDoc CMF</a></li>
+                        
+                        
+                        
+                        <li><a href="http://asciidoctor.org/docs/user-manual/" target="_blank">Asciidoctor User Manual</a></li>
+                        
+                        
+                        
+                        <li><a href="https://jekyllrb.com/docs/home/" target="_blank">Jekyll Docs</a></li>
+                        
+                        
+                        
+                        <li><a href="https://shopify.github.io/liquid/" target="_blank">Shopify Liquid Docs</a></li>
+                        
+                        
+                    </ul>
+                </li>
+                
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">LiquiDoc Portals<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        
+                        
+                        <li><a href="../docpro/home" target="_blank">DocPro Portal</a></li>
+                        
+                        
+                        
+                        <li><a href="../admin/home" target="_blank">Admin Portal</a></li>
+                        
+                        
+                        
+                        <li><a href="../dev/home" target="_blank">Developer Portal</a></li>
+                        
+                        
+                    </ul>
+                </li>
+                
+                
+                
+                <!--comment out this block if you want to hide search-->
+                <li>
+                    <!--start search-->
+                    <div id="search-demo-container">
+                        <input type="text" id="search-input" placeholder="">
+                        <ul id="results-container"></ul>
+                    </div>
+                    <script src="../theme/js/jekyll-search.js" type="text/javascript"></script>
+                    <script type="text/javascript">
+                            SimpleJekyllSearch.init({
+                                searchInput: document.getElementById('search-input'),
+                                resultsContainer: document.getElementById('results-container'),
+                                dataSource: 'search.json',
+                                searchResultTemplate: '<li><a href="{url}" title="Treating a Product Repository as a Submodule">{title}</a></li>',
+                    noResultsText: '',
+                            limit: 10,
+                            fuzzy: true,
+                    })
+                    </script>
+                    <!--end search-->
+                </li>
+            </ul>
+        </div>
+        </div>
+        <!-- /.container -->
+</nav>
+
+<!-- Page Content -->
+<div class="container">
+  <div id="main">
+    <!-- Content Row -->
+    <div class="row">
+        
+        
+            <!-- Sidebar Column -->
+            <div class="col-md-3" id="tg-sb-sidebar">
+                
+
+
+<ul id="mysidebar" class="nav">
+  <li class="sidebarTitle"> </li>
+  
+  
+  
+  <li>
+      <a href="#">Setup</a>
+      <ul>
+          
+          
+          
+          <li><a href="get-started-liquidoc">Getting Started with LiquiDoc</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="setup-toolset">Setup Local Tools</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a href="#">Build</a>
+      <ul>
+          
+          
+          
+          <li><a href="build-docs-basic">Building a Basic Docset</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="build-docs-advanced">Building Advanced Docsets</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a href="#">Contribute</a>
+      <ul>
+          
+          
+          
+          <li><a href="write-edit-asciidoc">AsciiDoc for Content</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="manage-source">Managing Files</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="commit-git">Working with Git</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="write-edit-yaml">YAML for Small Data</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="submit-data-content">Submitting for Review</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="review-data-content">Reviewing Merge Requests</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a href="#">Understand</a>
+      <ul>
+          
+          
+          
+          <li><a href="overview-liquidoc-cmf">LiquiDoc CMF Intro</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="ldcmf-structure-this">This LDCMF Environment</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="understand-contributor-rights">Contributor Rights</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="understand-reviews-policy">Merge Request Evaluation</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+      
+      <!-- if you aren't using the accordion, uncomment this block:
+         <p class="external">
+             <a href="#" id="collapseAll">Collapse All</a> | <a href="#" id="expandAll">Expand All</a>
+         </p>
+         -->
+</ul>
+
+<!-- this highlights the active parent class in the navgoco sidebar. this is critical so that the parent expands when you're viewing a page. This must appear below the sidebar code above. Otherwise, if placed inside customscripts.js, the script runs before the sidebar code runs and the class never gets inserted.-->
+<script>$("li.active").parents('li').toggleClass("active");</script>
+
+            </div>
+            
+        
+
+        <!-- Content Column -->
+        <div class="col-md-9" id="tg-sb-content">
+            <div class="post-header">
+   <h1 class="post-title-main">Treating a Product Repository as a Submodule</h1>
+</div>
+
+
+
+<div class="post-content">
+
+   
+
+    
+    
+<!-- this handles the automatic toc. use ## for subheads to auto-generate the on-page minitoc. if you use html tags, you must supply an ID for the heading element in order for it to appear in the minitoc. -->
+<script>
+$( document ).ready(function() {
+  // Handler for .ready() called.
+
+$('#toc').toc({ minimumHeaders: 0, listType: 'ul', showSpeed: 0, headers: 'h2,h3,h4' });
+
+/* this offset helps account for the space taken up by the floating toolbar. */
+$('#toc').on('click', 'a', function() {
+  var target = $(this.getAttribute('href'))
+    , scroll_target = target.offset().top
+
+  $(window).scrollTop(scroll_target - 10);
+  return false
+})
+  
+});
+</script>
+
+<div id="toc"></div>
+
+    
+
+
+    
+
+
+    
+
+  <div id="preamble">
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 83.3334%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">User story</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">As an <strong>administrator</strong>, I can <strong>treat a product repository as a submodule</strong>.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>There is a strong alternative to including your docs code in the same repository as your product code without sacrificing access to the product&#8217;s source from the docs source.
+That solution is <strong>Git submodules</strong>.</p>
+</div>
+<div class="paragraph">
+<p>Setting your product repo as a submodule of your docs repo enables the latter to alias the former as a subdirectory.
+From within any local instance of your docs repo, the entire product repo will appear as a directory in your docs source root, alongside <code>content/</code> and <code>data/</code>.
+This way, LiquiDoc can parse small-data files from the product codebase, and AsciiDoc files can <code>include::[]</code> actual product source in code listings, while the docs build will write to the a <code>build/</code> directory inside the docs repo for distinguished commitment and deployment.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The LiquiDoc Docs Project repo (<code>liquidoc-docs</code>) treats the Liqidoc product repo (<code>liquidoc-gem</code>) as a submodule.
+See <a href="adapting-these-docs.html">Adapting These Docs</a> for instructions on removing the submodule or reassigning it to your own product.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="adding-a-submodule">Adding a Submodule</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>It is trivial to link a submodule to your docs repo, though there are some considerations for maintaining the relationship.</p>
+</div>
+<div class="listingblock">
+<div class="title">Adding a submodule</div>
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">git submodule add {liquidoc_gem_repo_git_uri} product</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The submodule repo should appear as a subdirectory at <code>product/</code>.</p>
+</div>
+<div class="listingblock">
+<div class="title">Just another subfolder</div>
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ ls -l
+-rw-r--r--   1 me  staff   329 Feb 01 19:13 Gemfile
+-rw-r--r--   1 me  staff  2830 Feb 01 03:07 Gemfile.lock
+-rw-r--r--   1 me  staff   576 Feb 01 03:05 NOTICE
+-rw-r--r--   1 me  staff  2393 Feb 01 03:40 README.adoc
+drwxr-xr-x  10 me  staff   340 Feb 01 19:13 _configs
+drwxr-xr-x   3 me  staff   102 Feb 01 17:49 _templates
+drwxr-xr-x  10 me  staff   340 Feb 01 03:31 content
+drwxr-xr-x  10 me  staff   340 Feb 01 12:28 data
+<strong>drwxr-xr-x  10 me  staff   340 Feb 01 13:48 product</strong>
+drwxr-xr-x   8 me  staff   272 Feb 01 22:14 theme</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Having multiple products is a key use case for submodules.
+Such a case may be best addressed by treating first creating a <code>product/</code> or <code>lib/</code> directory under which to add multiple submodules.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Now that you have an alias path for your product, you can navigate into it.</p>
+</div>
+<div class="listingblock">
+<div class="title">Browsing a submodule</div>
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ ls product
+LICENSE   README.adoc  Rakefile  bin/ lib/ liquidoc.gemspec</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Best of all, you can manage each Git repo independently.
+Navigate into either repo on the command line in order to run <code>git</code> commands against that repo, including branch checkouts.</p>
+</div>
+<div class="listingblock">
+<div class="title">Branch switching in main vs subrepo</div>
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+$ git checkout -b new-branch
+Switched to a new branch 'new-branch'
+$ cd product
+product/$ git status
+On branch master
+Your branch is up-to-date with 'origin/master'.</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>See <a href="https://git-scm.com/book/en/v2/Git-Tools-Submodules">Git&#8217;s documentation</a> for full details.
+GitHub&#8217;s guide to “<a href="https://github.com/blog/2104-working-with-submodules">Working with Submodules</a>” is a little easier on the eyes.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="submodule-build-strategies">Submodule Build Strategies</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The two most-likely use cases for handling product code with submodules of a documentation repository are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>multiple product components, each in a distinct repository</p>
+</li>
+<li>
+<p>multiple product versions handled in branches of the product repo</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="managing-mutliple-submodules">Managing Mutliple Submodules</h3>
+<div class="paragraph">
+<p>This is the simplest scenario, as you may merely add each product component&#8217;s repo as a submodule and handle each as a subdirectory.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="managing-multiple-product-branches">Managing Multiple Product Branches</h3>
+<div class="paragraph">
+<p>Not quite as simple as multiple products in different repos, it may actually take less effort to handle multiple branches of the same repo.
+This breaks down further into two cases:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">identical documentation with different content</dt>
+<dd>
+<p>In this case, you are documenting multiple versions of a product where minimal variables differ.
+In a well-planned project, those variables will be reflected in a small-data file such as <code>meta.yml</code> or <code>product.yml</code>.
+Therefore, When you switch the submodule&#8217;s branch, those alternate variable values will now be readable, and the same LiquiDoc build config will build a nearly identical docset with those branch-specific details.</p>
+</dd>
+<dt class="hdlist1">different docs for different content</dt>
+<dd>
+<p>Here we&#8217;re talking about multiple product versions that must be matched by their own docs versions.
+The recommended approach is to store versioned docs in branches that match the product repo&#8217;s versioned branches, and manually (or programmatically) coordinate the docs repo&#8217;s branch with the product repo&#8217;s branch.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+
+    <div class="tags">
+        
+        <b>Tags: </b>
+        
+        
+        
+    </div>
+
+
+
+
+</div>
+
+<hr class="shaded"/>
+
+<footer>
+            <div class="row">
+                <div class="col-lg-12 footer">
+               &copy;2018 LiquiDocOps Collective. All rights reserved. <br />
+ Site last generated: Feb 20, 2018 <br />
+<p><img src="../assets/images/company_logo.png" alt="Company logo"/></p>
+                </div>
+            </div>
+</footer>
+
+
+        </div>
+    <!-- /.row -->
+</div>
+<!-- /.container -->
+</div>
+<!-- /#main -->
+    </div>
+
+</body>
+
+</html>
