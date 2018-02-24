@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="keywords" content=" ">
-<title>LiquiDoc Documentarian Portal | LiquiDoc Docs-as-Code Platform</title>
+<title>How This Documentation is Built | LiquiDoc Docs-as-Code Platform</title>
 <link rel="stylesheet" href="../theme/css/syntax.css">
 
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -42,7 +42,7 @@
 <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
 
-<link rel="alternate" type="application/rss+xml" title="LiquiDoc & LiquiDoc CMF | The Docs" href="127.0.0.1/docpro/feed.xml">
+<link rel="alternate" type="application/rss+xml" title="LiquiDoc & LiquiDoc CMF | The Docs" href="127.0.0.1/dev/feed.xml">
 
     <script>
         $(document).ready(function() {
@@ -193,7 +193,7 @@
                                 searchInput: document.getElementById('search-input'),
                                 resultsContainer: document.getElementById('results-container'),
                                 dataSource: 'search.json',
-                                searchResultTemplate: '<li><a href="{url}" title="LiquiDoc Documentarian Portal">{title}</a></li>',
+                                searchResultTemplate: '<li><a href="{url}" title="How This Documentation is Built">{title}</a></li>',
                     noResultsText: '',
                             limit: 10,
                             fuzzy: true,
@@ -375,7 +375,7 @@
         <!-- Content Column -->
         <div class="col-md-9" id="tg-sb-content">
             <div class="post-header">
-   <h1 class="post-title-main">LiquiDoc Documentarian Portal</h1>
+   <h1 class="post-title-main">How This Documentation is Built</h1>
 </div>
 
 
@@ -415,96 +415,307 @@ $('#toc').on('click', 'a', function() {
 
     
 
-  <div class="sect1">
-<h2 id="introducing-liquidoc-and-liquidoc-cmf">Introducing LiquiDoc and LiquiDoc CMF</h2>
+  <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Welcome to the LiquiDoc Documentarian Portal!</p>
+<p>LiquiDoc&#8217;s own documentation is a fairly complex implementation of LiquiDoc and the LiquiDoc Content Management Framework (LDCMF).
+It takes advantage of most of LiquiDoc&#8217;s capabilities and is the defining project for LDCMF.</p>
 </div>
 <div class="paragraph">
-<p>Here you will learn to write, develop, and manage great docs with LiquiDoc as a documentarian.</p>
+<p>The build is defined in <code>_configs/build-docs.yml</code>, which is a self-documenting configuration.
+Managing LiquiDoc build configurations is programming, albeit using an extraordinarily orderly “DSL” (domain-specific language).
+If you are not a developer, LiquiDoc&#8217;s self-documentation features may seem more intimidating than helpful.
+Nevertheless, spending a few moments on this page and reviewing the LiquiDoc Docs configuration file may be the best way to get a sense for the power and dexterity of LiquiDoc.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="order-out-of-chaos">Order Out of Chaos</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>LiquiDoc enables single sourcing of content and data by enabling files to be written to an effemeral directory.</p>
 </div>
 <div class="paragraph">
-<p>This Portal is intended to orient you to the role of <strong>documentarian</strong>, a LiquiDoc user mainly concerned with <em>creating and managing content</em>.
-This Portal expects that you have a pre-configured LiquiDoc CMF environment established by a qualified engineer, and you just need to get up and running so you can write/edit content.
-Hopefully, whoever did that configuring has edited this documentation in key areas to ensure it applies to your instance.</p>
+<p>The LiquiDoc configuration file is a map that pulls disparate files together just so, with the end result being one or more rich-media documents.
+LiquiDoc “steps” through this configuration when you run a build, and each step and substep yields automatic or custom messages.
+By default, these are printed to a file at <code>_build/pre/config-explainer.adoc</code>, or printed to screen with the <code>--explicit</code> command-line flag.</p>
 </div>
-<div class="admonitionblock tip">
+<div class="paragraph">
+<p>Go ahead and give it a try now:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">bundle exec liquidoc -c _configs/build-docs.yml --explicit</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This output is formatted as AsciiDoc ordered and unordered lists.
+You may find it helpful in understanding what the config file (<code>_configs/build-docs.yml</code>) is up to.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="the-config-explainer-output">The Config Explainer Output</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>What follows is the full text of LiquiDoc&#8217;s config-explainer feature for this project ({project_name_full}).</p>
+</div>
+<div class="admonitionblock note">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
+<i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Check with your LiquiDoc CMF administrator to ensure this guide is oriented toward your LDCMF instance; then maybe remind them to remove this note.
+Because the explainer is written as LiquiDoc progresses through the configuration file, this file will only be complete if at least one build has previously been performed <em>since</em> the last time the build configuration file was altered.
+The line below this one will include a <em>copy of</em> that file (<code>include::../pre/config-explainer.adoc[]</code>), made by migrating the file last step of the build process.
+That file will not be in place or complete until the build has completed at least once since the last time the config file was altered or the <code>{build_dir}/pre/</code> directory has been removed.
 </td>
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>Here are the user operations covered in this guide:</p>
+<div class="exampleblock">
+<div class="content">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Copies <code>content/</code> to <code>_build/</code>, without carrying the parent directory, so all content subdirectories are flush with the root.</p>
+</li>
+<li>
+<p>Copies <code>theme/</code> to <code>_build/</code>, so theme/ dir will be subordinate to the SSG source path.</p>
+</li>
+<li>
+<p>Performs the first round of product-data parsing to build two structurally vital files, sourcing data in <code>data/product.yml</code>.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Builds the stories index file used to give order to the PDF index file&#8217;s inclusion of topic files (<code>_build/includes/_built_page-meta.adoc</code>)</p>
+</li>
+<li>
+<p>Builds the metadata file <code>_build/includes/_built_page-meta.adoc</code> based on the user stories in <code>product.yml</code>, looping over them as directed in <code>_templates/liquid/page-meta.asciidoc</code>.</p>
+</li>
+</ol>
 </div>
+</li>
+<li>
+<p>Draws data from <code>data/meta.yml</code> and parses it as follows:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Builds <code>_build/includes/_built_company-info.adoc</code> pressed with the template <code>_templates/liquid/company-info.asciidoc</code>.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Draws data from <code>data/terms.yml</code> and parses it as follows:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Builds <code>_build/includes/_built_terms.adoc</code> pressed with the template <code>_templates/liquid/terms.asciidoc</code>, to be included into the 'jargon guide'.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Draws data from <code>NOTICE</code> and parses it as follows:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Builds <code>_build/includes/_built_dependencies_table.adoc</code> pressed with the template <code>_templates/liquid/dependencies.asciidoc</code>, using a regular expression pattern to extract data from the plaintext source file before passing the results to Liquid.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Copies <code>_build/theme/</code> to <code>_build/site/</code>, to be in place for Jekyll builds.</p>
+</li>
+<li>
+<p>Copies <code>data/</code> to <code>_build/</code>, in order to have a copy available for includes (as snippets, not data sources). (Note: We&#8217;ll also be adding generated data files into this directory.)
+.</p>
+</li>
+<li>
+<p>Draws data from <code>data/product.yml</code>, to have user-stories content in convenient includes, and parses it as follows:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Builds <code>_build/includes/_built_user-stories-bulleted-by-role.adoc</code> pressed with the template <code>_templates/liquid/user-stories-bulleted-by-role.asciidoc</code>.</p>
+</li>
+<li>
+<p>Builds <code>_build/includes/_built_user-stories-full.adoc</code> pressed with the template <code>_templates/liquid/user-stories-full.asciidoc</code>.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Draws data from <code>data/product.yml</code>, to build lists of files to <em>exclude from</em> a given guide&#8217;s Jekyll build (otherwise it would grab all our <code>topics/</code> source files for every guide)
+, and parses it as follows:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Builds <code>_build/data/excludes-docpro.yml</code> pressed with the template <code>_templates/liquid/excludes-docpro.yaml</code>.</p>
+</li>
+<li>
+<p>Builds <code>_build/data/excludes-admin.yml</code> pressed with the template <code>_templates/liquid/excludes-admin.yaml</code>.</p>
+</li>
+<li>
+<p>Builds <code>_build/data/excludes-dev.yml</code> pressed with the template <code>_templates/liquid/excludes-dev.yaml</code>.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Draws data from <code>data/meta.yml</code> and parses it as follows:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Builds <code>_build/data/topnav.yml</code> pressed with the template <code>_templates/liquid/topnav.yaml</code>, the source file for the top navigation bar.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Draws data from <code>data/product.yml</code>, the source files for the guide-specific sidebars, and parses it as follows:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Builds <code>_build/data/sidebars/docpro.yml</code> pressed with the template <code>_templates/liquid/sidebar-docpro.yaml</code>.</p>
+</li>
+<li>
+<p>Builds <code>_build/data/sidebars/admin.yml</code> pressed with the template <code>_templates/liquid/sidebar-admin.yaml</code>.</p>
+</li>
+<li>
+<p>Builds <code>_build/data/sidebars/dev.yml</code> pressed with the template <code>_templates/liquid/sidebar-dev.yaml</code>.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Using the index file <code>_build/portal-index.adoc</code> as a map&#8230;&#8203;</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Uses Asciidoctor/Prawn to generate a PDF file <code>_build/docs/docpro-guide.pdf</code>.</p>
+</li>
+<li>
+<p>Uses Jekyll config files:</p>
+<div class="openblock">
+<div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p><a href="get-started-liquidoc">Get started with a liquidoc-ready repository</a></p>
+<p><code>_configs/jekyll-global.yml</code></p>
 </li>
 <li>
-<p><a href="overview-liquidoc-cmf">Grasp the significance of liquidoc cmf</a></p>
+<p><code>_configs/jekyll-guides-common.yml</code></p>
 </li>
 <li>
-<p><a href="ldcmf-structure-this">Get familiar with this ldcmf environment</a></p>
+<p><code>_configs/jekyll-guide-1.yml</code></p>
 </li>
 <li>
-<p><a href="setup-toolset">Establish a great local toolset</a></p>
-</li>
-<li>
-<p><a href="write-edit-asciidoc">Write and edit content in asciidoc</a></p>
-</li>
-<li>
-<p><a href="manage-source">Locate and manage source files</a></p>
-</li>
-<li>
-<p><a href="commit-git">Commit changes to source control</a></p>
-</li>
-<li>
-<p><a href="write-edit-yaml">Write and edit small-data in yaml</a></p>
-</li>
-<li>
-<p><a href="submit-data-content">Submit and iterate data/content commits for publication</a></p>
-</li>
-<li>
-<p><a href="review-data-content">Eview and approve data/content commits for publication</a></p>
-</li>
-<li>
-<p><a href="build-docs-basic">Build a preconfigured docset</a></p>
-</li>
-<li>
-<p><a href="build-docs-advanced">Build a preconfigured docset with additional options</a></p>
-</li>
-<li>
-<p><a href="understand-contributor-rights">Understand my rights as a contributor</a></p>
-</li>
-<li>
-<p><a href="understand-reviews-policy">Understand how merge requests are evaluated</a></p>
+<p><code>_build/data/excludes-docpro.yml</code></p>
 </li>
 </ul>
 </div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-This document contains lots of jargon.
-See the <a href="jargon-guide.html">Jargon Guide</a> if you get lost.
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>to generate a static site at <code>_build/site/</code>, the static files for the 'docpro' web portal.</p>
+</div>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Using the index file <code>_build/portal-index.adoc</code> as a map&#8230;&#8203;</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Uses Asciidoctor/Prawn to generate a PDF file <code>_build/docs/admin-guide.pdf</code>, to create a PDF customized for the 'admin' user.</p>
+</li>
+<li>
+<p>Uses Jekyll config files:</p>
+<div class="openblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><code>_configs/jekyll-global.yml</code></p>
+</li>
+<li>
+<p><code>_configs/jekyll-guides-common.yml</code></p>
+</li>
+<li>
+<p><code>_configs/jekyll-guide-2.yml</code></p>
+</li>
+<li>
+<p><code>_build/data/excludes-admin.yml</code></p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>Copyright &#169; 2018 LiquiDocOps Collective</p>
+<p>to generate a static site at <code>_build/site/</code>, the static files for the 'docpro' web portal.</p>
+</div>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Using the index file <code>_build/portal-index.adoc</code> as a map&#8230;&#8203;</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Uses Asciidoctor/Prawn to generate a PDF file <code>_build/docs/dev-guide.pdf</code>, to create a PDF customized for the 'admin' user.</p>
+</li>
+<li>
+<p>Uses Jekyll config files:</p>
+<div class="openblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><code>_configs/jekyll-global.yml</code></p>
+</li>
+<li>
+<p><code>_configs/jekyll-guides-common.yml</code></p>
+</li>
+<li>
+<p><code>_configs/jekyll-guide-3.yml</code></p>
+</li>
+<li>
+<p><code>_build/data/excludes-dev.yml</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>to generate a static site at <code>_build/site/</code>, the static files for the 'developer' web portal.</p>
+</div>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Copies <code>_build/theme/</code> to <code>_build/site/</code>, to create a common directory for all portals.</p>
+</li>
+<li>
+<p>Copies <code>_build/assets/</code> to <code>_build/site/</code>, to create a common assets base for all portals.</p>
+</li>
+<li>
+<p>Copies <code>_build/docs/</code> to <code>_build/site/</code>, the downloadable PDF artifacts.</p>
+</li>
+<li>
+<p>Copies <code>content/index.html</code> to <code>_build/site/</code>, the HTML splash page for the whole shabang, like it&#8217;s 1999.</p>
+</li>
+<li>
+<p>Copies <code>_build/pre/config-explainer.adoc</code> to <code>_build/includes/</code>.</p>
+</li>
+</ol>
+</div>
+</div>
 </div>
 </div>
 </div>
